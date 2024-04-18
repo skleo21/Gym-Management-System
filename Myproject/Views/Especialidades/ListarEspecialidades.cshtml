@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Myproject.Models.especialidades>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>Especilidade</th>
+        <th>Comandos</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.especialidade
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.especialidade.Trim() }) |
+            @Html.ActionLink("Details", "Details", new { id=item.especialidade.Trim() }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.especialidade.Trim() })
+        </td>
+    </tr>
+}
+
+</table>

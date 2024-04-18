@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="projectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="clientes">
+    <Key>
+      <PropertyRef Name="idcli" />
+    </Key>
+    <Property Name="idcli" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ncliente" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="datanasC" Type="DateTime" Precision="0" />
+    <Property Name="idade" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="foto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="reservas" Relationship="Self.FK__reservas__idcli__4222D4EF" FromRole="clientes" ToRole="reservas" />
+  </EntityType>
+  <EntityType Name="especialidades">
+    <Key>
+      <PropertyRef Name="especialidade" />
+    </Key>
+    <Property Name="especialidade" Type="String" MaxLength="20" FixedLength="true" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="trainers" Relationship="Self.fkptraineresp" FromRole="especialidades" ToRole="trainers" />
+  </EntityType>
+  <EntityType Name="trainers">
+    <Key>
+      <PropertyRef Name="idpt" />
+    </Key>
+    <Property Name="idpt" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ptrainer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="especialidade" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
+    <Property Name="xp" Type="Int32" />
+    <Property Name="idade" Type="DateTime" Precision="0" />
+    <Property Name="phora" Type="Decimal" Precision="10" Scale="2" />
+    <NavigationProperty Name="especialidades" Relationship="Self.fkptraineresp" FromRole="trainers" ToRole="especialidades" />
+    <NavigationProperty Name="reservas" Relationship="Self.FK__reservas__idpt__412EB0B6" FromRole="trainers" ToRole="reservas" />
+  </EntityType>
+  <EntityType Name="reservas">
+    <Key>
+      <PropertyRef Name="idreserva" />
+    </Key>
+    <Property Name="idreserva" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idpt" Type="Int32" />
+    <Property Name="idcli" Type="Int32" />
+    <Property Name="datainicio" Type="DateTime" Precision="3" />
+    <Property Name="datafinal" Type="DateTime" Precision="3" />
+    <Property Name="tempo" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="custo" Type="Decimal" Precision="10" Scale="2" />
+    <NavigationProperty Name="clientes" Relationship="Self.FK__reservas__idcli__4222D4EF" FromRole="reservas" ToRole="clientes" />
+    <NavigationProperty Name="trainers" Relationship="Self.FK__reservas__idpt__412EB0B6" FromRole="reservas" ToRole="trainers" />
+  </EntityType>
+  <Association Name="FK__reservas__idcli__4222D4EF">
+    <End Role="clientes" Type="Self.clientes" Multiplicity="0..1" />
+    <End Role="reservas" Type="Self.reservas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="clientes">
+        <PropertyRef Name="idcli" />
+      </Principal>
+      <Dependent Role="reservas">
+        <PropertyRef Name="idcli" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fkptraineresp">
+    <End Role="especialidades" Type="Self.especialidades" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="trainers" Type="projectModel.trainers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="especialidades">
+        <PropertyRef Name="especialidade" />
+      </Principal>
+      <Dependent Role="trainers">
+        <PropertyRef Name="especialidade" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__reservas__idpt__412EB0B6">
+    <End Role="trainers" Type="projectModel.trainers" Multiplicity="0..1" />
+    <End Role="reservas" Type="Self.reservas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="trainers">
+        <PropertyRef Name="idpt" />
+      </Principal>
+      <Dependent Role="reservas">
+        <PropertyRef Name="idpt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="projectEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="clientes" EntityType="Self.clientes" />
+    <EntitySet Name="especialidades" EntityType="Self.especialidades" />
+    <EntitySet Name="trainers" EntityType="projectModel.trainers" />
+    <EntitySet Name="reservas" EntityType="Self.reservas" />
+    <AssociationSet Name="FK__reservas__idcli__4222D4EF" Association="Self.FK__reservas__idcli__4222D4EF">
+      <End Role="clientes" EntitySet="clientes" />
+      <End Role="reservas" EntitySet="reservas" />
+    </AssociationSet>
+    <AssociationSet Name="fkptraineresp" Association="Self.fkptraineresp">
+      <End Role="especialidades" EntitySet="especialidades" />
+      <End Role="trainers" EntitySet="trainers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__reservas__idpt__412EB0B6" Association="Self.FK__reservas__idpt__412EB0B6">
+      <End Role="trainers" EntitySet="trainers" />
+      <End Role="reservas" EntitySet="reservas" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

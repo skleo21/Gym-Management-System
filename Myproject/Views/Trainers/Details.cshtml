@@ -1,0 +1,67 @@
+﻿@model Myproject.Models.trainers
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ptrainer</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ptrainer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ptrainer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.xp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.xp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idade)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.ptrainerfoto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ptrainerfoto)*@
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.phora)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.phora)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.especialidades.especialidade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.especialidades.especialidade)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idpt }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

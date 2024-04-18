@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="projectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name=" trainers">
+    <Key>
+      <PropertyRef Name="idpt" />
+    </Key>
+    <Property Name="idpt" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ptrainer" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="especialidade" Type="nchar" MaxLength="20" />
+    <Property Name="xp" Type="int" />
+    <Property Name="idade" Type="date" />
+    <Property Name="ptrainerfoto" Type="varbinary(max)" />
+    <Property Name="phora" Type="decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <EntityType Name="clientes">
+    <Key>
+      <PropertyRef Name="idcli" />
+    </Key>
+    <Property Name="idcli" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ncliente" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="datanasC" Type="date" />
+    <Property Name="idade" Type="int" StoreGeneratedPattern="Computed" />
+    <Property Name="foto" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="especialidades">
+    <Key>
+      <PropertyRef Name="especialidade" />
+    </Key>
+    <Property Name="especialidade" Type="nchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="reservas">
+    <Key>
+      <PropertyRef Name="idreserva" />
+    </Key>
+    <Property Name="idreserva" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idpt" Type="int" />
+    <Property Name="idcli" Type="int" />
+    <Property Name="datainicio" Type="datetime" />
+    <Property Name="datafinal" Type="datetime" />
+    <Property Name="tempo" Type="int" StoreGeneratedPattern="Computed" />
+    <Property Name="custo" Type="decimal" Precision="10" Scale="2" />
+  </EntityType>
+  <Association Name="FK__reservas__idcli__4222D4EF">
+    <End Role="clientes" Type="Self.clientes" Multiplicity="0..1" />
+    <End Role="reservas" Type="Self.reservas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="clientes">
+        <PropertyRef Name="idcli" />
+      </Principal>
+      <Dependent Role="reservas">
+        <PropertyRef Name="idcli" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__reservas__idpt__412EB0B6">
+    <End Role=" trainers" Type="Self. trainers" Multiplicity="0..1" />
+    <End Role="reservas" Type="Self.reservas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role=" trainers">
+        <PropertyRef Name="idpt" />
+      </Principal>
+      <Dependent Role="reservas">
+        <PropertyRef Name="idpt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fkptraineresp">
+    <End Role="especialidades" Type="Self.especialidades" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role=" trainers" Type="Self. trainers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="especialidades">
+        <PropertyRef Name="especialidade" />
+      </Principal>
+      <Dependent Role=" trainers">
+        <PropertyRef Name="especialidade" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="projectModelStoreContainer">
+    <EntitySet Name=" trainers" EntityType="Self. trainers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="clientes" EntityType="Self.clientes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="especialidades" EntityType="Self.especialidades" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="reservas" EntityType="Self.reservas" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__reservas__idcli__4222D4EF" Association="Self.FK__reservas__idcli__4222D4EF">
+      <End Role="clientes" EntitySet="clientes" />
+      <End Role="reservas" EntitySet="reservas" />
+    </AssociationSet>
+    <AssociationSet Name="FK__reservas__idpt__412EB0B6" Association="Self.FK__reservas__idpt__412EB0B6">
+      <End Role=" trainers" EntitySet=" trainers" />
+      <End Role="reservas" EntitySet="reservas" />
+    </AssociationSet>
+    <AssociationSet Name="fkptraineresp" Association="Self.fkptraineresp">
+      <End Role="especialidades" EntitySet="especialidades" />
+      <End Role=" trainers" EntitySet=" trainers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

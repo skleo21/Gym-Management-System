@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="projectModelStoreContainer" CdmEntityContainer="projectEntities">
+    <EntitySetMapping Name="clientes">
+      <EntityTypeMapping TypeName="IsTypeOf(projectModel.clientes)">
+        <MappingFragment StoreEntitySet="clientes">
+          <ScalarProperty Name="idcli" ColumnName="idcli" />
+          <ScalarProperty Name="ncliente" ColumnName="ncliente" />
+          <ScalarProperty Name="datanasC" ColumnName="datanasC" />
+          <ScalarProperty Name="idade" ColumnName="idade" />
+          <ScalarProperty Name="foto" ColumnName="foto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="especialidades">
+      <EntityTypeMapping TypeName="IsTypeOf(projectModel.especialidades)">
+        <MappingFragment StoreEntitySet="especialidades">
+          <ScalarProperty Name="especialidade" ColumnName="especialidade" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="reservas">
+      <EntityTypeMapping TypeName="IsTypeOf(projectModel.reservas)">
+        <MappingFragment StoreEntitySet="reservas">
+          <ScalarProperty Name="idreserva" ColumnName="idreserva" />
+          <ScalarProperty Name="idpt" ColumnName="idpt" />
+          <ScalarProperty Name="idcli" ColumnName="idcli" />
+          <ScalarProperty Name="datainicio" ColumnName="datainicio" />
+          <ScalarProperty Name="datafinal" ColumnName="datafinal" />
+          <ScalarProperty Name="tempo" ColumnName="tempo" />
+          <ScalarProperty Name="custo" ColumnName="custo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="trainers">
+      <EntityTypeMapping TypeName="IsTypeOf(projectModel.trainers)">
+        <MappingFragment StoreEntitySet=" trainers">
+          <ScalarProperty Name="phora" ColumnName="phora" />
+          <ScalarProperty Name="idade" ColumnName="idade" />
+          <ScalarProperty Name="xp" ColumnName="xp" />
+          <ScalarProperty Name="especialidade" ColumnName="especialidade" />
+          <ScalarProperty Name="ptrainer" ColumnName="ptrainer" />
+          <ScalarProperty Name="idpt" ColumnName="idpt" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
